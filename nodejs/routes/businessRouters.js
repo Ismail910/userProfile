@@ -11,7 +11,8 @@ router.post('/',[ upload('business').single('photo')],  businessMedia.create);
 
 router.get('/:userID', businessMedia.get);
 
-router.put('/id', businessMedia.update)
+router.put('/id',[upload('userProfil').single('photo')], businessMedia.update)
+
 
 router.delete('/:id', businessMedia.delete);
 

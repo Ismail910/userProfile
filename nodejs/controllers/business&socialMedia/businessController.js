@@ -34,15 +34,60 @@ class businessMedia {
        }
     }
 
-    async update(req, res){
+    // async update(req, res){
+    //     try {
+    //         const id = req.params.id;
+    //         const business  = await businessModel.updateOne({_id:id},{$set:req.body});
+    //         return res.json(business);
+    //     } catch (error) {
+    //         return res.status(500).send(error);
+    //     }
+    // }
+    async update(req, res) {
         try {
-            const id = req.params.id;
-            const business  = await businessModel.updateOne({_id:id},{$set:req.body});
-            return res.json(business);
+          // Check if file was uploaded successfully
+          if (!req.file || res.statusCode === 404) {
+            return res.status(400).json({ error: "Invalid file upload" });
+          }
+      
+          const objuser = {
+            name: req.body.name,
+            description: req.body.description,
+            photo: req.file.filename,
+            video:req.body.video,
+            link:req.body.link,
+          };
+      
+        
+          const imagePath = path.join(
+            __dirname,
+            "../../assets/uploads/businessfile",
+            objuser.photo
+          );
+      
+          // Check if file deletion was successful
+          try {
+            if (fs.existsSync(imagePath)) {
+              fs.unlinkSync(imagePath);
+            }
+          } catch (error) {
+            return res.status(500).json({ error: "Error deleting file" });
+          }
+      
+          const id = req.params.id;
+      
+          // Check if ID is valid
+          if (!id) {
+            return res.status(400).json({ error: "Invalid ID" });
+          }
+      
+          const business = await adminModel.updateOne({ _id: id }, { $set: objuser });
+          return res.json(business);
         } catch (error) {
-            return res.status(500).send(error);
+          return res.status(500).json({ error: "Error updating user profile" });
         }
-    }
+      }
+      
 
     async delete(req , res){
         try{

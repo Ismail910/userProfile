@@ -31,7 +31,7 @@ const UserSchema = mongoose.Schema({
         // match: /^( mywebsite.com):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
         type: String
     },
-    token: { type: String },
+   
     socialMedia: [{type: mongoose.Schema.Types.ObjectId, ref: "socialMedia" }],
     business: [{type: mongoose.Schema.Types.ObjectId,  ref : "business" }],
     

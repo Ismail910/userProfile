@@ -55,27 +55,37 @@ class  createUser {
 
 
     async update(req, res){
-        const objuser = {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            photo: req.file.filename,
-            phoneNumber: req.body.phoneNumber,
-            link:req.body.link,
-          };
-        if (req.file && res.statusCode != 404) {
+
+        const id = req.params.id;
+        const user = await adminModel.findById(id);
+        if (req.file || res.statusCode != 404) {
             const imagePath = path.join(
               __dirname,
               "../../assets/uploads/userProfil",
-              objuser.photo
+              user.photo
             );
             fs.unlinkSync(imagePath);
-            objuser.photo = req.file.filename;
+            user.photo = req.file.filename;
           }
-          const id = req.params.id;
+        //   const objuser = {
+        //     name: req.body.name,
+        //     email: req.body.email,
+        //     password: req.body.password,
+            
+        //     phoneNumber: req.body.phoneNumber,
+        //     link:req.body.link,
+        //   };
+
+         
+         user.name = req.body.name;
+          user.email = req.body.email;
+         user.password = req.body.password;
+         user.phoneNumber = req.body.phoneNumber;
+          user.link = req.body.link;
         try {
-            const business  = await adminModel.updateOne({_id:id},{$set:objuser});
-            return res.json(business);
+            // const business  = await adminModel.updateOne({_id:id},{$set:objuser});
+           const userData =  await user.save();
+            return res.json(userData);
         } catch (error) {
             return res.status(500).send(error);
         }
