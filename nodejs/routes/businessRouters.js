@@ -3,17 +3,16 @@ const router = express.Router();
 
 const upload = require("../middlewares/uplode")
 
-const Authorization= require('../services/Authorization');
+const { authUser } = require('../middlewares/auth');
 
 const businessMedia = require('../controllers/business&socialMedia/businessController');
 
-router.post('/',[ upload('business').single('photo')],  businessMedia.create);
+router.post('/',[authUser, upload('business').single('photo')],  businessMedia.create);
 
 router.get('/:userID', businessMedia.get);
 
-router.put('/id',[upload('userProfil').single('photo')], businessMedia.update)
+router.put('/id',[ authUser , upload('userProfil').single('photo')], businessMedia.update);
 
-
-router.delete('/:id', businessMedia.delete);
+router.delete('/:id',authUser , businessMedia.delete);
 
 module.exports = router;

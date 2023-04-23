@@ -9,17 +9,16 @@ const { login} = require("../controllers/users/userController");
 const createUser = require("../controllers/users/adminController")
 const upload = require("../middlewares/uplode");
 
-const { admin } = require('../services/Authorization')
-  
-router.post('/login',loginValidations, login);
+const { authAdmin } = require("../middlewares/auth");
 
-router.post('/',[ createUserValidations, upload('userProfil').single('photo')], createUser.create);
 
-router.get('/',admin, createUser.get);
-router.get('/:id',admin, createUser.getById);
+router.post('/',[authAdmin, createUserValidations, upload('userProfil').single('photo')], createUser.create);
 
-router.put('/:id',[upload('userProfil').single('photo')], createUser.update);
+router.get('/', createUser.get);
+router.get('/:id', createUser.getById);
 
-router.delete('/:id',admin, createUser.delete);
+router.put('/:id',[authAdmin, upload('userProfil').single('photo')], createUser.update);
+
+router.delete('/:id',authAdmin, createUser.delete);
 
   module.exports =  router;

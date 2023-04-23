@@ -9,7 +9,7 @@ class  createUser {
     async  create (req ,res) {
         
        try {
-      
+        console.log("Creating");
         const objuser = {
             name: req.body.name,
             email: req.body.email,
@@ -17,6 +17,7 @@ class  createUser {
             photo: req.file.filename,
             phoneNumber: req.body.phoneNumber,
             link:req.body.link,
+            // admin:req.body.admin
           };
 
         const email = await adminModel.findOne({email: req.body.email});
@@ -55,7 +56,6 @@ class  createUser {
 
 
     async update(req, res){
-
         const id = req.params.id;
         const user = await adminModel.findById(id);
         if (req.file || res.statusCode != 404) {
@@ -67,23 +67,14 @@ class  createUser {
             fs.unlinkSync(imagePath);
             user.photo = req.file.filename;
           }
-        //   const objuser = {
-        //     name: req.body.name,
-        //     email: req.body.email,
-        //     password: req.body.password,
-            
-        //     phoneNumber: req.body.phoneNumber,
-        //     link:req.body.link,
-        //   };
 
-         
          user.name = req.body.name;
           user.email = req.body.email;
          user.password = req.body.password;
          user.phoneNumber = req.body.phoneNumber;
           user.link = req.body.link;
         try {
-            // const business  = await adminModel.updateOne({_id:id},{$set:objuser});
+           
            const userData =  await user.save();
             return res.json(userData);
         } catch (error) {

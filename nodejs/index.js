@@ -4,7 +4,8 @@ const app = express();
 const port = env.PORT || 3000 ;
 const connect = require('./config/db');
 const cors = require("cors");
- 
+const mongoose = require('mongoose');
+const URL = "mongodb://127.0.0.1:27017" ;
 
 
 app.use(express.json());
@@ -20,14 +21,18 @@ const businessRoutes = require('./routes/businessRouters');
 
 app.use('/admin', adminRoutes);
 app.use('/business', businessRoutes );
-
 app.use('/social', socialRoutes );
-
- 
 app.use('/user', userRoutes );
 
 
-connect();
+// connect();
+
+mongoose.connect(`${URL}/userProfile`).then(()=>{
+   console.log('Connected to MongoDB');
+}).catch(err=>{
+   console.error(err);
+})
+
 
  app.listen(port , ()=>{
     console.log(`Your serverw is runing at port number : ${port}`);

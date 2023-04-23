@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
     link:{
         type: String
     },
-    user: { type: mongoose.Schema.Types.ObjectId,required:true, ref: "user" }
+   
 });
 
 const UserModel = mongoose.model("business", UserSchema);
