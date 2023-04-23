@@ -23,5 +23,5 @@ const UserSchema = mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId,required:true, ref: "user" }
 });
 
-const UserModel = mongoose.model("user", UserSchema);
+const UserModel = mongoose.model("business", UserSchema);
 module.exports = UserModel;

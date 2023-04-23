@@ -9,7 +9,7 @@ const businessMedia = require('../controllers/business&socialMedia/businessContr
 
 router.post('/',  businessMedia.create);
 
-router.get('/:userID',   businessMedia.get);
+router.get('/:userID', businessMedia.get);
 
 router.put('/id', businessMedia.update)
 

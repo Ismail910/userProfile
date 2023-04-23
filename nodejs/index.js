@@ -16,6 +16,12 @@ app.use(cors());
 
 
 const userRoutes = require('./routes/userRoutes');
+const socialRoutes = require('./routes/socialMediaRouters');
+const businessRoutes = require('./routes/businessRouters');
+
+app.use('/business', businessRoutes );
+
+app.use('/social', socialRoutes );
 
  
 app.use('/user', userRoutes );

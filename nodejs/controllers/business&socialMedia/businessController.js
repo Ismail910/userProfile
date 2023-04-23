@@ -1,7 +1,7 @@
 
 
 
-const {validationResult} = require("express-validator")
+// const {validationResult} = require("express-validator")
 
 const businessModel = require("../../models/Business");
 class businessMedia {
