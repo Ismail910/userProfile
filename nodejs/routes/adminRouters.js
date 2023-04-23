@@ -10,7 +10,7 @@ const createUser = require("../controllers/users/adminController")
 const upload = require("../middlewares/uplode")
 
   
-router.post('/login',loginValidations, login);
+// router.post('/login',loginValidations, login);
 
 
 router.post('/createUser',[createUserValidations, upload('userProfil').single('photo')], createUser.create);

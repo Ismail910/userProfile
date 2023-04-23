@@ -9,7 +9,7 @@ const adminModel = require("../../models/user");
 class  createUser {
     async  create (req ,res) {
        try {
-      
+        console.log("Creating");
         const objuser = {
             name: req.body.name,
             email: req.body.email,
@@ -17,6 +17,7 @@ class  createUser {
             photo: req.file.filename,
             phoneNumber: req.body.phoneNumber,
             link:req.body.link,
+            // admin:req.body.admin
           };
 
         const email = await adminModel.findOne({email: req.body.email});
