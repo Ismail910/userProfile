@@ -1,9 +1,8 @@
 
-
-
-
 // const {validationResult} = require("express-validator")
-
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
 const adminModel = require("../../models/user");
 class  createUser {
@@ -55,9 +54,26 @@ class  createUser {
 
 
     async update(req, res){
+        const objuser = {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            photo: req.file.filename,
+            phoneNumber: req.body.phoneNumber,
+            link:req.body.link,
+          };
+        if (req.file && res.statusCode != 404) {
+            const imagePath = path.join(
+              __dirname,
+              "../../assets/uploads/userProfil",
+              objuser.photo
+            );
+            fs.unlinkSync(imagePath);
+            objuser.photo = req.file.filename;
+          }
+          const id = req.params.id;
         try {
-            const id = req.params.id;
-            const business  = await adminModel.updateOne({_id:id},{$set:req.body});
+            const business  = await adminModel.updateOne({_id:id},{$set:objuser});
             return res.json(business);
         } catch (error) {
             return res.status(500).send(error);

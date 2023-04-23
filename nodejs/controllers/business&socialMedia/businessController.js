@@ -7,7 +7,16 @@ const businessModel = require("../../models/Business");
 class businessMedia {
     async  create (req ,res) {
        try {
-        await businessModel.create(req.body)
+        
+        const obj = {
+            name: req.body.name,
+            description: req.body.description,
+            photo: req.file.filename,
+            video:req.body.video,
+            link:req.body.link,
+          };
+
+        await businessModel.create(obj)
         return res.status(201).send('your business has created successfully!')
        } catch (error) {
         return res.status(401).send(error);
@@ -47,3 +56,48 @@ class businessMedia {
 }
 
 module.exports = new businessMedia; 
+
+
+
+//     async (req, res) => {
+//       const id = req.params.id;
+//       if (!req.body.name || !req.body.Date) {
+//         return res
+//           .status(400)
+//           .json({ message: "Name and Date are required fields" });
+//       }
+  
+//       const date = new Date(req.body.Date);
+//       if (isNaN(date.getTime()) || date.getTime() < Date.now()) {
+//         return res
+//           .status(400)
+//           .json({ message: "Invalid date format or date is in the past" });
+//       }
+//       const objCourse = {
+//         name: req.body.name,
+//         description: req.body.description,
+//         Date: req.body.Date,
+//       };
+//       if (req.file && res.statusCode != 404) {
+//         const imagePath = path.join(
+//           __dirname,
+//           "../../assets/uploads/userProfil",
+//           objCourse.image
+//         );
+//         fs.unlinkSync(imagePath);
+//         obj.photo = req.file.filename;
+//       }
+//       try {
+//         const course = await courseModel.updateOne(
+//           { _id: id },
+//           { $set: objCourse }
+//         );
+//         if (!course) {
+//           return res.status(404).send("Course not found");
+//         }
+//         return res.json(course);
+//       } catch (err) {
+//         res.status(500).send(err);
+//       }
+//     }
+//   );

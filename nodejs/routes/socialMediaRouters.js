@@ -9,7 +9,7 @@ const socialMedia = require('../controllers/business&socialMedia/socialMediaCont
 
 router.post('/',  socialMedia.create);
 
-router.get('/:userID',   socialMedia.getAccounts)
+router.get('/:userID',  socialMedia.getAccounts)
 
 router.delete('/:id', socialMedia.deleteAccount)
 

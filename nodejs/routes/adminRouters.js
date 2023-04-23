@@ -8,22 +8,18 @@ const { login} = require("../controllers/users/userController");
 
 const createUser = require("../controllers/users/adminController")
 const upload = require("../middlewares/uplode")
-
+const { admin } = require('../services/Authorization')
   
 router.post('/login',loginValidations, login);
 
 
-router.post('/createUser',[createUserValidations, upload('userProfil').single('photo')], createUser.create);
+router.post('/',[admin, createUserValidations, upload('userProfil').single('photo')], createUser.create);
 
-router.get('/', createUser.get);
-router.get('/:id', createUser.getById);
+router.get('/',admin, createUser.get);
+router.get('/:id',admin, createUser.getById);
 
-router.patch('/:id', createUser.update);
+router.put('/:id',[admin,upload('userProfil').single('photo')], createUser.update);
 
-router.delete('/:id', createUser.delete);
-
-
-
-
+router.delete('/:id',admin, createUser.delete);
 
   module.exports =  router;

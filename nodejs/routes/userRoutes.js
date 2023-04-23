@@ -6,7 +6,7 @@ const router = express.Router();
 
 
   
-
+// router.put('/:id',[upload('userProfil').single('photo')], createUser.update);
 
 
 

@@ -1,13 +1,13 @@
 const express =  require('express');
 const router = express.Router();
 
-
+const upload = require("../middlewares/uplode")
 
 const Authorization= require('../services/Authorization');
 
 const businessMedia = require('../controllers/business&socialMedia/businessController');
 
-router.post('/',  businessMedia.create);
+router.post('/',[ upload('business').single('photo')],  businessMedia.create);
 
 router.get('/:userID', businessMedia.get);
 
