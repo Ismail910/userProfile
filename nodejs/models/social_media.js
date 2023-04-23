@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 const socialSchema = mongoose.Schema({
     name:{
         require:true,
-        type: String
+        type: String,
+        enum: ["facebook", "twitter", "instagram","snap"],
     },
     link:{
         type: String,
-        enum: ["facebook", "twitter", "instagram","snap"],
+        require:true
     },
     user: { type: mongoose.Schema.Types.ObjectId,required:true, ref: "user" }
     

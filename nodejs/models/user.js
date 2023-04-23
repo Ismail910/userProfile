@@ -8,11 +8,10 @@ const UserSchema = mongoose.Schema({
     },
     photo:{
         type: String,
-
     },
     phoneNumber:{
-        require:true,
-        type: Number,
+       
+        type: String,
     },
     email: {
         require:true,
@@ -28,7 +27,8 @@ const UserSchema = mongoose.Schema({
         default: false
     },
     link:{
-       require:true,
+        require:true,
+        // match: /^( mywebsite.com):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
         type: String
     },
     socialMedia: [{type: mongoose.Schema.Types.ObjectId, ref: "socialMedia" }],

@@ -13,12 +13,12 @@ app.use(express.json());
 app.use(cors());
 
 
-
-
 const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRouters');
 const socialRoutes = require('./routes/socialMediaRouters');
 const businessRoutes = require('./routes/businessRouters');
 
+app.use('/admin', adminRoutes);
 app.use('/business', businessRoutes );
 
 app.use('/social', socialRoutes );
