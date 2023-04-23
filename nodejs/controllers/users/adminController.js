@@ -7,6 +7,7 @@ const fs = require("fs");
 const adminModel = require("../../models/user");
 class  createUser {
     async  create (req ,res) {
+        
        try {
       
         const objuser = {

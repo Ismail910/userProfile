@@ -12,7 +12,6 @@ const { admin } = require('../services/Authorization')
   
 router.post('/login',loginValidations, login);
 
-
 router.post('/',[admin, createUserValidations, upload('userProfil').single('photo')], createUser.create);
 
 router.get('/',admin, createUser.get);
