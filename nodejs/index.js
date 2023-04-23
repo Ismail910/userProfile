@@ -18,7 +18,7 @@ app.use(cors());
 const userRoutes = require('./routes/userRoutes');
 
  
-app.use('/api', userRoutes );
+app.use('/user', userRoutes );
 
 
 connect();

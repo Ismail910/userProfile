@@ -12,4 +12,6 @@ const { login} = require("../controllers/users/userController");
 router.post('/login',loginValidations, login);
 
 
+
+
   module.exports =  router;

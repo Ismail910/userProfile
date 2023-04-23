@@ -30,7 +30,9 @@ const UserSchema = mongoose.Schema({
     link:{
        require:true,
         type: String
-    }
+    },
+    socialMedia: [{type: mongoose.Schema.Types.ObjectId, ref: "socialMedia" }],
+    business: [{type: mongoose.Schema.Types.ObjectId,  ref : "business" }],
     
 });
 
