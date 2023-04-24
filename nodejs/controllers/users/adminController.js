@@ -5,6 +5,7 @@ const path = require("path");
 const fs = require("fs");
 
 const adminModel = require("../../models/user");
+const socialModel = require("../../models/social_media");
 class  createUser {
     async  create (req ,res) {
         
@@ -46,7 +47,7 @@ class  createUser {
     async getById(req, res){
         const id = req.params.id;
         try {
-         const response = await adminModel.find({_id:id});
+         const response = await adminModel.find({_id:id}).populate('socialMedia').populate('business');
          return res.status(200).json(response)
         } catch (error) {
          return res.status(500).send(error);

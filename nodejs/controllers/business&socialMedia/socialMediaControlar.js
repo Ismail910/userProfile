@@ -1,10 +1,12 @@
 const {validationResult} = require("express-validator")
 
 const SicialMediaModel = require("../../models/social_media");
+const UserModel = require("../../models/user");
 class SicialMedia {
     async  create (req ,res) {
        try {
-        await SicialMediaModel.create(req.body)
+       const account= await SicialMediaModel.create(req.body)
+        await UserModel.updateOne({_id:req.params.userID},{$push:{'socialMedia':account._id}})
         return res.status(201).send('your account has created successfully!')
        } catch (error) {
         return res.status(401).send(error);

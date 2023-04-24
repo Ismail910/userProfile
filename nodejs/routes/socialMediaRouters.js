@@ -7,10 +7,10 @@ const Authorization= require('../services/Authorization');
 
 const socialMedia = require('../controllers/business&socialMedia/socialMediaControlar');
 
-router.post('/',authUser , socialMedia.create);
+router.post('/:userID',authUser , socialMedia.create);
 
 router.get('/:userID',  socialMedia.getAccounts)
 
-router.delete('/:id',authUser, socialMedia.deleteAccount)
+router.delete('/:id/:userID',authUser, socialMedia.deleteAccount)
 
 module.exports = router;

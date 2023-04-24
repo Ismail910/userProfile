@@ -7,12 +7,12 @@ const { authUser } = require('../middlewares/auth');
 
 const businessMedia = require('../controllers/business&socialMedia/businessController');
 
-router.post('/',[authUser, upload('business').single('photo')],  businessMedia.create);
+router.post('/:userID',[authUser, upload('business').single('photo')],  businessMedia.create);
 
 router.get('/:userID', businessMedia.get);
 
-router.put('/id',[ authUser , upload('userProfil').single('photo')], businessMedia.update);
+router.put('/id/:userID',[ authUser , upload('userProfil').single('photo')], businessMedia.update);
 
-router.delete('/:id',authUser , businessMedia.delete);
+router.delete('/:id/:userID',authUser , businessMedia.delete);
 
 module.exports = router;

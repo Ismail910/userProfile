@@ -4,6 +4,7 @@
 // const {validationResult} = require("express-validator")
 
 const businessModel = require("../../models/Business");
+const UserModel = require("../../models/user");
 class businessMedia {
     async  create (req ,res) {
        try {
@@ -16,7 +17,8 @@ class businessMedia {
             link:req.body.link,
           };
 
-        await businessModel.create(obj)
+       const business= await businessModel.create(obj)
+       await UserModel.updateOne({_id:req.params.userID},{$push:{'business':business._id}})
         return res.status(201).send('your business has created successfully!')
        } catch (error) {
         return res.status(401).send(error);
