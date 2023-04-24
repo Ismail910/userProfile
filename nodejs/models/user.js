@@ -33,7 +33,6 @@ const UserSchema = mongoose.Schema({
     },
 
     token: { type: String },
-
     socialMedia: [{type: mongoose.Schema.Types.ObjectId, ref: "socialMedia" }],
     business: [{type: mongoose.Schema.Types.ObjectId,  ref : "business" }],
     

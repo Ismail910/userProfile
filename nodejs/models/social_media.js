@@ -12,7 +12,7 @@ const socialSchema = mongoose.Schema({
         require:true
     },
     
-    
+    user: {type: mongoose.Schema.Types.ObjectId,  ref : "user" },
 });
 
 const socialModel = mongoose.model("socialMedia", socialSchema);
