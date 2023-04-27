@@ -18,6 +18,7 @@ const UserSchema = mongoose.Schema({
         type: String,
     },
     link:{
+        require:true,
         type: String
     },
     user: {type: mongoose.Schema.Types.ObjectId,  ref : "user" },
